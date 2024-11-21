@@ -11,19 +11,29 @@ class SystemColorService
     public function setSystemColorAfterTrafficLightColorChange(Request $request, TrafficLight $trafficLight)
     {
         // get previous color
-        $previousColor = $trafficLight->systemColors()->latest()->first();
+        $previousColor = $trafficLight->lightColors()->latest()->first();
 
         // if previous color is red and current color is same, update time limit only
 
+        $light_color_time_limit = 60;
         // if ai is not working, or the request time limit is not set, light color will be changed after 1 minutes
         if (!$request->time_limit) {
-            $light_color_time_limit = now()->addMinutes(1);
+            // return 'no time limit';
+            $light_color_time_limit = 60;
         } else {
             $light_color_time_limit = $request->time_limit;
         }
 
         if ($previousColor->color == $trafficLight->color) {
-            $trafficLight->systemColors()->create([
+            // get latest and update time limit
+            $latestColor = $trafficLight->lightColors()->latest()->first();
+            $latestColor->update([
+                'time_limit' => $light_color_time_limit,
+            ]);
+        } else {
+            // create new record
+            $trafficLight->lightColors()->create([
+                'color' => $trafficLight->color,
                 'time_limit' => $light_color_time_limit,
             ]);
         }

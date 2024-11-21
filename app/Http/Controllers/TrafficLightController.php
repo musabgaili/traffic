@@ -13,7 +13,7 @@ class TrafficLightController extends Controller
     public function setStatus(Request $request)
     {
         $request->validate([
-            'status' => 'required|string',
+            'status' => 'required|string|in:on,off',
         ]);
 
         $trafficLight = TrafficLight::find($request->traffic_light_id);
@@ -48,7 +48,7 @@ class TrafficLightController extends Controller
     {
         $request->validate([
             'traffic_light_id' => 'required|integer',
-            'color' => 'required|string',
+            'color' => 'required|string|in:red,yellow,green',
         ]);
         $trafficLight = TrafficLight::find($request->traffic_light_id);
         if (!$trafficLight) {
@@ -56,7 +56,7 @@ class TrafficLightController extends Controller
             return response()->json(['message' => 'Traffic light not found'], 404);
         }
 
-        $trafficLight->light_color = $request->color;
+        $trafficLight->color = $request->color;
         // time limit for light color
         $systemColorService = new SystemColorService();
         $systemColorService->setSystemColorAfterTrafficLightColorChange($request, $trafficLight);
@@ -64,6 +64,7 @@ class TrafficLightController extends Controller
 
         return response()->json(['message' => 'Traffic light light color set'], 200);
     }
+
 
 
     // car count

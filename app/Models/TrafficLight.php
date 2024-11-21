@@ -12,7 +12,7 @@ class TrafficLight extends Model
 {
     //
 
-    protected $fillable = ['number', 'status', 'color'];
+    protected $guarded = [];
 
     use TrafficLightSystemColorsTrait;
     use TrafficLightSystemStatusesTrait;
