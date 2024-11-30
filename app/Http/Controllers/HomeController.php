@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         return redirect()->route('traffic-light.index');
-        return view('home');
+        // return view('home');
     }
 }

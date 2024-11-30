@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_colors', function (Blueprint $table) {
+        Schema::create('ras_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('traffic_light_id')->constrained('traffic_lights');
-            $table->enum('color', ['red', 'yellow', 'green']);
-
-            // set color to red, yellow or green time limit based on decision  made by AI model
-            // seconds
-            $table->integer('time_limit');
-
+            $table->string('name');
+            // current sent message
+            $table->string('current_message')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_colors');
+        Schema::dropIfExists('ras_groups');
     }
 };

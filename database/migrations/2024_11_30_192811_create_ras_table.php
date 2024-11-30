@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('system_statuses', function (Blueprint $table) {
+        // rasperry pi table
+        Schema::create('ras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('traffic_light_id')->constrained('traffic_lights');
-            $table->enum('status', ['on', 'off']);
-            $table->integer('duration')->nullable();
+            $table->string('unique_id');
+            // group id
+            $table->foreignId('group_id')->nullable()->constrained('ras_groups')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_statuses');
+        Schema::dropIfExists('ras');
     }
 };

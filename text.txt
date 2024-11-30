@@ -4,27 +4,27 @@
 | Traffic Light API Routes
 |--------------------------------------------------------------------------
 |
-| POST /api/traffic-light/status
+| POST https://musab.link/api/traffic-light/status
 | Updates the operational status (on/off) of a specific traffic light
 | Requires: traffic_light_id, status
 | Used by: Microcontrollers to report status changes
 |
-| POST /api/traffic-light/color
+| POST https://musab.link/api/traffic-light/color
 | Sets the current color of a traffic light and its timing
 | Requires: traffic_light_id, color, time_limit (optional)
 | Used by: AI system to control light changes
 |
-| POST /api/traffic-light/car-count
+| POST https://musab.link/api/traffic-light/car-count
 | Updates the count of cars waiting at a traffic light
 | Requires: traffic_light_id, count
 | Used by: Sensors to report real-time traffic volume
 |
-| GET /api/traffic-light/{id}
+| GET https://musab.link/api/traffic-light/{id}
 | Retrieves details for a specific traffic light by ID
 | Returns: Full traffic light object with current state
 | Used by: Dashboard and monitoring systems
 |
-| GET /api/traffic-lights
+| GET https://musab.link/api/traffic-lights
 | Lists all traffic lights in the system
 | Returns: Array of all traffic light objects
 | Used by: Admin dashboard for system overview
@@ -41,9 +41,9 @@
 | be assigned to the "web" middleware group. Make something great!
 |
 | Main Routes:
-| - / : Redirects to traffic light index page
-| - /traffic-light : Shows overview of all traffic lights
-| - /home : Dashboard home page
+| - https://musab.link/ : Redirects to traffic light index page
+| - https://musab.link/traffic-light : Shows overview of all traffic lights
+| - https://musab.link/home : Dashboard home page
 |
 | Authentication:
 | - Login routes enabled
@@ -68,14 +68,14 @@
         "traffic_light_id": 1,
         "status": "on"
     }
-    // Usage: POST request to /api/traffic-light/status
+    // Usage: POST request to https://musab.link/api/traffic-light/status
     // Sets the status of traffic light with ID 1 to "on"
     */
 
     // getSystemStatuses
     /*
-    // No JSON body needed. Use GET request to /api/traffic-light/system-statuses/{id}
-    // Example: GET /api/traffic-light/system-statuses/1
+    // No JSON body needed. Use GET request to https://musab.link/api/traffic-light/system-statuses/{id}
+    // Example: GET https://musab.link/api/traffic-light/system-statuses/1
     // Retrieves system statuses for traffic light with ID 1
     */
 
@@ -86,7 +86,7 @@
         "traffic_light_id": 1,
         "color": "green"
     }
-    // Usage: POST request to /api/traffic-light/color
+    // Usage: POST request to https://musab.link/api/traffic-light/color
     // Sets the color of traffic light with ID 1 to "green"
     */
 
@@ -97,6 +97,6 @@
         "traffic_light_id": 1,
         "count": 5
     }
-    // Usage: POST request to /api/traffic-light/car-count
+    // Usage: POST request to https://musab.link/api/traffic-light/car-count
     // Sets the car count for traffic light with ID 1 to 5
     */
