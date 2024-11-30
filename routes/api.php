@@ -32,9 +32,13 @@ Route::get('/get-image', function (Request $request) {
     try {
         $ras = Ras::where('id', $request->id)
             ->orWhere('unique_id', $request->unique_id)->first();
-        $ras_group = RasGroup::where('id', $ras->group_id)->first();
 
-        return response()->json(['image' => $ras_group->current_message], 200,);
+        if (!$ras->group_id) {
+            return response()->json(['image' => 'main'], 200);
+        }
+
+        $ras_group = RasGroup::where('id', $ras->group_id)->first();
+        return response()->json(['image' => $ras_group->current_message], 200);
     } catch (\Throwable $th) {
         //throw $th;
         return response()->json(['message' => 'Error Happened'], 400,);
