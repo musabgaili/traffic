@@ -27,7 +27,7 @@ Route::get('/user', function (Request $request) {
 //     }
 // });
 
-Route::get('/get-image', function (Request $request) {
+Route::post('/get-image', function (Request $request) {
     // get image of the rasppery group
     try {
         $ras = Ras::where('id', $request->id)
