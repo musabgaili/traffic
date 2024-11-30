@@ -76,7 +76,7 @@
                                 </td>
                                 <td>{{$ras->id}}</td>
                                 <td>{{$ras->unique_id}}</td>
-                                <td>{{ $ras->rasgroups?->count() > 0 ? $ras->rasgroups->pluck('name')->join(', ') : 'No Group' }}</td>
+                                <td>{{ $ras->groups?->count() > 0 ? $ras->groups->pluck('name')->join(', ') : 'No Group' }}</td>
                                 <td>{{$ras->message}}</td>
 
                             </tr>
