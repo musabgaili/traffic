@@ -10,8 +10,8 @@ class RasGroup extends Model
     //
 
     protected $guarded = ['id'];
-    public function rases(): HasMany
+    public function rases()
     {
-        return $this->hasMany(Ras::class,'group_id');
+        return $this->belongsToMany(Ras::class, 'ras_ras_group', 'ras_group_id', 'ras_id');
     }
 }

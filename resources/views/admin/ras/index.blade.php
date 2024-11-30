@@ -61,13 +61,12 @@
                             <th>Select</th>
                             <th>ID</th>
                             <th>Serial</th>
-                            <th>Group</th>
-                            {{-- <th>Status</th>
-                            <th>Last Message</th> --}}
+                            <th>Groups </th>
+                            <th>Last Message</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($all_rases->sortBy('group_id') as $ras)
+                        @foreach($all_rases->sortBy('id') as $ras)
                             <tr>
                                 <td>
                                     <div class="form-check">
@@ -77,13 +76,9 @@
                                 </td>
                                 <td>{{$ras->id}}</td>
                                 <td>{{$ras->unique_id}}</td>
-                                <td>{{$ras->group_id ? $rasgroups->find($ras->group_id)->name : 'No Group'}}</td>
-                                {{-- <td>
-                                    <span class="badge badge-{{ $ras->status == 'offline' ? 'danger' : 'success' }}">
-                                        {{ucfirst($ras->status)}}
-                                    </span>
-                                </td> --}}
-                                {{-- <td>{{$ras->last_message}}</td> --}}
+                                <td>{{ $ras->rasgroups?->count() > 0 ? $ras->rasgroups->pluck('name')->join(', ') : 'No Group' }}</td>
+                                <td>{{$ras->message}}</td>
+
                             </tr>
                         @endforeach
                     </tbody>

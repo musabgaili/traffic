@@ -35,6 +35,12 @@ class AdminController extends Controller
         $rasgroup->current_message = $request->current_message;
         $rasgroup->save();
 
+        // Update all related rases through many-to-many relationship
+        foreach ($rasgroup->rases as $ras) {
+            $ras->message = $request->current_message;
+            $ras->save();
+        }
+
         return redirect()->back()->with('success', 'Message updated successfully');
     }
 
@@ -47,7 +53,13 @@ class AdminController extends Controller
 
         $rasgroup = RasGroup::findOrFail($request->group_id);
 
-        Ras::whereIn('id', $request->ras_ids)->update(['group_id' => $request->group_id]);
+        // Get all selected Ras devices
+        $rases = Ras::whereIn('id', $request->ras_ids)->get();
+
+        // Attach each Ras to the group using the many-to-many relationship
+        foreach ($rases as $ras) {
+            $ras->groups()->attach($rasgroup->id);
+        }
 
         return redirect()->back()->with('success', 'Devices assigned to group successfully');
     }
@@ -59,7 +71,32 @@ class AdminController extends Controller
         foreach ($rasgroups as $rasgroup) {
             $rasgroup->current_message = 'main';
             $rasgroup->save();
+            // Update all related rases through many-to-many relationship
+        }
+        $rases = Ras::all();
+        foreach ($rases as $ras) {
+            $ras->message = 'main';
+            $ras->save();
         }
         return redirect()->back()->with('success', 'All groups set to main message');
+    }
+
+    public function detachDevice(Request $request)
+    {
+        // return $request;
+        // Validate request
+        $request->validate([
+            'ras_id' => 'required|exists:ras,id',
+            'ras_group_id' => 'required|exists:ras_groups,id'
+        ]);
+
+        // Find the RAS device and group
+        $ras = Ras::findOrFail($request->ras_id);
+        $rasgroup = RasGroup::findOrFail($request->ras_group_id);
+
+        // Detach the device from the group
+        $ras->groups()->detach($rasgroup->id);
+
+        return redirect()->back()->with('success', 'Device removed from group successfully');
     }
 }

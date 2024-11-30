@@ -21,7 +21,8 @@
                     <div class="card-body">
                         <div class="alert alert-info mb-4">
                             <h4 class="alert-heading">Image Control Panel</h4>
-                            <p>Click one of the buttons below to change the display image for all devices in this group:</p>
+                            <p>Click one of the buttons below to change the display image for all devices in this group:
+                            </p>
                             {{-- <ul>
                                 <li>Current </li>
                                 <li>Under </li>
@@ -32,13 +33,17 @@
                             @csrf
                             @method('PUT')
                             <div class="d-flex flex-column gap-2">
-                                <button type="submit" name="current_message" value="current" class="btn btn-primary mb-2">Current</button>
-                                <button type="submit" name="current_message" value="under" class="btn btn-primary mb-2">Under</button>
-                                <button type="submit" name="current_message" value="future" class="btn btn-primary">Future</button>
+                                <button type="submit" name="current_message" value="current"
+                                    class="btn btn-primary mb-2">Current</button>
+                                <button type="submit" name="current_message" value="under"
+                                    class="btn btn-primary mb-2">Under</button>
+                                <button type="submit" name="current_message" value="future"
+                                    class="btn btn-primary">Future</button>
                             </div>
                         </form>
 
-                        <h4 class="text-muted mt-3">CURRENT DISPLAY MESSAGE: {{ strtoupper($rasgroup->current_message) }}</h4>
+                        <h4 class="text-muted mt-3">CURRENT DISPLAY MESSAGE:
+                            {{ strtoupper($rasgroup->current_message) }}</h4>
                     </div>
                 </div>
             </div>
@@ -52,17 +57,25 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            @foreach($rasgroup->rases as $ras)
+                            @foreach ($rasgroup->rases as $ras)
                                 <div class="col-6 p-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">RAS Device Details</h5>
                                             <div class="card-text">
-                                                <p><strong>ID:</strong> {{$ras->id}}</p>
-                                                <p><strong>Unique ID:</strong> {{$ras->unique_id}}</p>
-                                                <p><strong>Created:</strong> {{$ras->created_at}}</p>
-                                                <p><strong>Updated:</strong> {{$ras->updated_at}}</p>
+                                                <p><strong>ID:</strong> {{ $ras->id }}</p>
+                                                <p><strong>Unique ID:</strong> {{ $ras->unique_id }}</p>
+                                                <p><strong>Created:</strong> {{ $ras->created_at }}</p>
+                                                <p><strong>Updated:</strong> {{ $ras->updated_at }}</p>
                                             </div>
+                                            <form
+                                                action="{{ route('rasgroup.detach-device', ['ras_group_id'=> $rasgroup->id, 'ras_id'=>$ras->id]) }}"
+                                                method="POST" class="mt-3">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">Remove from
+                                                    Group</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

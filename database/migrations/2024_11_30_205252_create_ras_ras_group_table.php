@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // rasperry pi table
-        Schema::create('ras', function (Blueprint $table) {
+        Schema::create('ras_ras_group', function (Blueprint $table) {
             $table->id();
-            $table->string('unique_id');
-            // group id
-            // $table->foreignId('group_id')->nullable()->constrained('ras_groups')->onDelete('cascade');
-
-            $table->string('message')->nullable();
-
+            $table->foreignId('ras_id')->constrained('ras')->onDelete('cascade');
+            $table->foreignId('ras_group_id')->constrained('ras_groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ras');
+        Schema::dropIfExists('ras_ras_group');
     }
 };

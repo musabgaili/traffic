@@ -42,6 +42,9 @@ Route::post('/ras/show-all', [AdminController::class, 'showAll'])->name('ras.sho
 
 
 
+// detach device from group
+Route::delete('/rasgroup/detach-device', [AdminController::class, 'detachDevice'])->name('rasgroup.detach-device');
+
 
 
 /*
