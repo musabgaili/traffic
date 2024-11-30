@@ -15,17 +15,17 @@ Route::get('/user', function (Request $request) {
 
 // register rasperry pi-->
 
-Route::get('/register', function (Request $request) {
-    try {
-        $ras =     Ras::create([
-            'unique_id' => $request->uniqe_id,
-        ]);
-        return response()->json(['message' => 'Registered Successfully'], 201,);
-    } catch (Exception $e) {
-        // error handling
-        return response()->json(['message' => 'Error Happened'], 400,);
-    }
-});
+// Route::get('/register', function (Request $request) {
+//     try {
+//         $ras =     Ras::create([
+//             'unique_id' => $request->uniqe_id,
+//         ]);
+//         return response()->json(['message' => 'Registered Successfully'], 201,);
+//     } catch (Exception $e) {
+//         // error handling
+//         return response()->json(['message' => 'Error Happened'], 400,);
+//     }
+// });
 
 Route::get('/get-image', function (Request $request) {
     // get image of the rasppery group

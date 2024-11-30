@@ -8,6 +8,18 @@
 </head>
 <body>
     <div class="container mt-5">
+
+
+        <div class="card mb-5">
+            <div class="card-body text-center">
+                <h2 class="card-title">Main Control</h2>
+                <form action="{{ route('ras.show-all') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-lg btn-primary">Show main image in all screens</button>
+                </form>
+            </div>
+        </div>
+
         <h3 class="mb-4">RAS Groups</h3>
         <div class="row mb-5">
             @foreach($rasgroups as $rasgroup)
@@ -50,8 +62,8 @@
                             <th>ID</th>
                             <th>Serial</th>
                             <th>Group</th>
-                            <th>Status</th>
-                            <th>Last Message</th>
+                            {{-- <th>Status</th>
+                            <th>Last Message</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -64,14 +76,14 @@
                                     </div>
                                 </td>
                                 <td>{{$ras->id}}</td>
-                                <td>{{$ras->serial}}</td>
+                                <td>{{$ras->unique_id}}</td>
                                 <td>{{$ras->group_id ? $rasgroups->find($ras->group_id)->name : 'No Group'}}</td>
-                                <td>
+                                {{-- <td>
                                     <span class="badge badge-{{ $ras->status == 'offline' ? 'danger' : 'success' }}">
                                         {{ucfirst($ras->status)}}
                                     </span>
-                                </td>
-                                <td>{{$ras->last_message}}</td>
+                                </td> --}}
+                                {{-- <td>{{$ras->last_message}}</td> --}}
                             </tr>
                         @endforeach
                     </tbody>

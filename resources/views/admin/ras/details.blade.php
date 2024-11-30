@@ -19,16 +19,26 @@
                         <h3>{{ $rasgroup->name }}</h3>
                     </div>
                     <div class="card-body">
+                        <div class="alert alert-info mb-4">
+                            <h4 class="alert-heading">Image Control Panel</h4>
+                            <p>Click one of the buttons below to change the display image for all devices in this group:</p>
+                            {{-- <ul>
+                                <li>Current </li>
+                                <li>Under </li>
+                                <li>Future </li>
+                            </ul> --}}
+                        </div>
                         <form action="{{ route('rasgroup.update-message', $rasgroup->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <div class="form-group">
-                                <label for="current_message">Current Message</label>
-                                <input type="text" class="form-control" id="current_message" name="current_message"
-                                    value="{{ $rasgroup->current_message }}" required>
+                            <div class="d-flex flex-column gap-2">
+                                <button type="submit" name="current_message" value="current" class="btn btn-primary mb-2">Current</button>
+                                <button type="submit" name="current_message" value="under" class="btn btn-primary mb-2">Under</button>
+                                <button type="submit" name="current_message" value="future" class="btn btn-primary">Future</button>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-3">Update Message</button>
                         </form>
+
+                        <h4 class="text-muted mt-3">CURRENT DISPLAY MESSAGE: {{ strtoupper($rasgroup->current_message) }}</h4>
                     </div>
                 </div>
             </div>

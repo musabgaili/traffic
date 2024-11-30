@@ -24,11 +24,16 @@ class DatabaseSeeder extends Seeder
         // create 2 rasGroups
 
         RasGroup::create([
-            'name' => 'Group 1 - 8 rp',
+            'name' => 'Current',
             'current_message' => 'none',
         ]);
         RasGroup::create([
-            'name' => 'Group 1 - 6 rp',
+            'name' => 'Under',
+            'current_message' => 'none',
+        ]);
+
+        RasGroup::create([
+            'name' => 'Future',
             'current_message' => 'none',
         ]);
 
@@ -37,7 +42,8 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 1; $i <= 14; $i++) {
             \App\Models\Ras::create([
-                'unique_id' =>  str_pad($i, 2, '0', STR_PAD_LEFT),
+                // 'unique_id' =>  str_pad($i, 2, '0', STR_PAD_LEFT),
+                'unique_id'=> $i,
                 // 'group_id' => 1
             ]);
         }

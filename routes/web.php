@@ -37,6 +37,11 @@ Route::put('/rasgroup/{id}/update-message', [AdminController::class, 'updateMess
 // assign ras to group
 Route::post('/ras/assign-group', [AdminController::class, 'assignGroup'])->name('ras.assign-group');
 
+// show all ras
+Route::post('/ras/show-all', [AdminController::class, 'showAll'])->name('ras.show-all');
+
+
+
 
 
 /*

@@ -51,4 +51,15 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Devices assigned to group successfully');
     }
+
+
+    public function showAll(Request $request)
+    {
+        $rasgroups = RasGroup::all();
+        foreach ($rasgroups as $rasgroup) {
+            $rasgroup->current_message = 'main';
+            $rasgroup->save();
+        }
+        return redirect()->back()->with('success', 'All groups set to main message');
+    }
 }
