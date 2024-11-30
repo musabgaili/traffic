@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('traffic-light.index');
+        return redirect()->route('ras.index');
         // return view('home');
     }
 }
