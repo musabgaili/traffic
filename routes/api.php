@@ -43,3 +43,19 @@ Route::post('/get-image', function (Request $request) {
         return response()->json(['message' => 'Error Happened'], 400,);
     }
 });
+
+
+Route::post('/set-image', function (Request $request) {
+    logger($request);
+    $rasgroups = RasGroup::all();
+    foreach ($rasgroups as $rasgroup) {
+        $rasgroup->current_message = $request->message;
+        $rasgroup->save();
+        // Update all related rases through many-to-many relationship
+    }
+    $rases = Ras::all();
+    foreach ($rases as $ras) {
+        $ras->message = $request->message;
+        $ras->save();
+    }
+});
