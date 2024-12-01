@@ -46,7 +46,8 @@ Route::post('/get-image', function (Request $request) {
 
 
 Route::post('/set-image', function (Request $request) {
-    logger($request);
+    // logger($request);
+    $request->validate(['message'=> 'required']);
     $rasgroups = RasGroup::all();
     foreach ($rasgroups as $rasgroup) {
         $rasgroup->current_message = $request->message;
